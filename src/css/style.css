@@ -1,0 +1,64 @@
+:root {
+  box-sizing: border-box;
+  font-size: calc(1vw + 0.5em);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  background-color: grey;
+}
+
+.wrapper {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.keyboard__title {
+  text-align: center;
+}
+.keyboard__textarea {
+  resize: vertical;
+  max-width: 100%;
+  min-height: 10em;
+  outline: none;
+}/*# sourceMappingURL=style.css.map */
