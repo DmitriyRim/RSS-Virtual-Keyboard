@@ -42,6 +42,7 @@ button {
 body {
   margin: 0;
   background-color: grey;
+  font-family: "Roboto", sans-serif;
 }
 
 .wrapper {
@@ -61,4 +62,38 @@ body {
   max-width: 100%;
   min-height: 10em;
   outline: none;
+  margin-bottom: 10px;
+}
+.keyboard__row {
+  display: flex;
+  justify-content: stretch;
+  gap: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.keyboard__buttons {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(206, 210, 217, 0.7);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.keyboard__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  min-width: 45px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.keyboard__btn-action {
+  background: #AEB3BE;
+  flex-grow: 1;
+}
+.keyboard__btn_space {
+  flex-grow: 10;
 }/*# sourceMappingURL=style.css.map */
