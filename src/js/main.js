@@ -7,6 +7,7 @@ class VirtualKeyboard {
         this.container = document.querySelector(boxSelector);
         this.textArea = null;
         this.keyboard = null;
+        this.buttons = null;
     }
     init(){
         const title = document.createElement("h1");
@@ -16,6 +17,9 @@ class VirtualKeyboard {
 
         this.textArea = document.createElement("textarea");
         this.textArea.classList.add("keyboard__textarea");
+        this.textArea.addEventListener("chenge", (e) => {
+            e.preventDefault();
+        });
 
         this.keyboard = document.createElement("div");
         this.keyboard.classList.add("keyboard__buttons");
@@ -26,19 +30,33 @@ class VirtualKeyboard {
 
         this.container.append(this.wrapper);
         this.render();
+        window.addEventListener("keydown", this.switchBackroundBtn.bind(this));
+        window.addEventListener("keyup", this.switchBackroundBtn.bind(this));
     }
     render() {
+        this.buttons = {};
         for(let i = 0; i < this.data.length; i++) {
             const rowBox = document.createElement("div");
-            let keys = null;
-            console.log(this.data[i]);
+            let buttons = null;
             rowBox.classList.add("keyboard__row");
-            keys = this.data[i].map(elem => {
+            buttons = this.data[i].map(elem => {
                 const key = new Key(elem, "en");
-                return key.create();
+                const btn = key.create();
+
+                this.buttons[elem.code] = btn;
+                return btn;
             });
-            rowBox.append(...keys);
+            rowBox.append(...buttons);
             this.keyboard.append(rowBox);
+        }
+    }
+    switchBackroundBtn(e){
+        const elem = this.buttons[e.code];
+        
+        if(elem) {
+            e.preventDefault();
+            e.type === "keyup" && elem.classList.contains("keyboard__btn_down")?  elem.classList.remove("keyboard__btn_down") : null; 
+            e.type === "keydown" ? elem.classList.add("keyboard__btn_down") : null;
         }
     }
 }
