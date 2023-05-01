@@ -90,14 +90,14 @@ const dataKeyboard = [
         },
         {
             value: "Backspace",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "Backspace",
         },
     ],
     [
         {
             value: "Tab",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "Tab",
         },
         {
@@ -184,14 +184,14 @@ const dataKeyboard = [
         },
         {
             value: "Del",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "Delete",
         },
     ],
     [
         {
             value: "CapsLock",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "CapsLock",
         },
         {
@@ -274,14 +274,14 @@ const dataKeyboard = [
         },
         {
             value: "Enter",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "Enter",
         },
     ],
     [
         {
             value: "Shift",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "ShiftLeft",
         },
         {
@@ -358,59 +358,59 @@ const dataKeyboard = [
         },
         {
             value: "↑",
-            className: "keyboard__btn keyboard__backspace",
+            className: "keyboard__btn ",
             code: "ArrowUp",
         },
         {
             value: "Shift",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "ShiftRight",
         },
     ],
     [
         {
             value: "Ctrl",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "ControlLeft",
         },
         {
             value: "Win",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "MetaLeft",
         },
         {
             value: "Alt",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "AltLeft",
         },
         {
             value: " ",
-            className: "keyboard__btn keyboard__backspace keyboard__btn_space",
+            className: "keyboard__btn  keyboard__btn_space",
             code: "Space",
         },
         {
             value: "Alt",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "AltRight",
         },
         {
             value: "←",
-            className: "keyboard__btn keyboard__backspace",
+            className: "keyboard__btn ",
             code: "ArrowLeft",
         },
         {
             value: "↓",
-            className: "keyboard__btn keyboard__backspace",
+            className: "keyboard__btn ",
             code: "ArrowDown",
         },
         {
             value: "→",
-            className: "keyboard__btn keyboard__backspace",
+            className: "keyboard__btn ",
             code: "ArrowRight",
         },
         {
             value: "Ctrl",
-            className: "keyboard__btn keyboard__backspace keyboard__btn-action",
+            className: "keyboard__btn  keyboard__btn-action",
             code: "ControlRight",
         },
     ]

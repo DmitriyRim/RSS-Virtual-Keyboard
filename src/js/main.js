@@ -86,7 +86,7 @@ class VirtualKeyboard {
             let lang = localStorage.getItem("lang") === "en" ? "ru" : "en";
 
             localStorage.setItem("lang", lang);
-            this.switchingLang();
+            this.switchButtons();
         }
     }
     clickHandlerDown(e) {
@@ -143,7 +143,7 @@ class VirtualKeyboard {
         switch (e.code) {
         case "ShiftLeft":
         case "ShiftRight":
-            this.switchingLang();
+            this.switchButtons();
             break;
         }
     }
@@ -172,7 +172,7 @@ class VirtualKeyboard {
             this.textArea.selectionStart, this.textArea.selectionEnd = posStart;
         }
     }
-    switchingLang(){
+    switchButtons(){
         let lang = localStorage.getItem("lang");
 
         for(let i = 0; i < this.data.length; i++) {
@@ -203,7 +203,7 @@ class VirtualKeyboard {
     }
     switchCapsLock() {
         this.capsLock = this.capsLock ? false : true;
-        this.switchingLang();
+        this.switchButtons();
     }
 }
 
