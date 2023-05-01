@@ -8,6 +8,7 @@ class VirtualKeyboard {
         this.textArea = null;
         this.keyboard = null;
         this.buttons = null;
+        this.capsLock = false;
         !localStorage.getItem("lang") ? localStorage.setItem("lang", "en") : null;
     }
     init(){
@@ -27,7 +28,8 @@ class VirtualKeyboard {
         this.keyboard.classList.add("keyboard__buttons");
 
         message.classList.add("keyboard__description");
-        message.innerHTML = "<li>Комбинация для переключения языка: ctrl + alt</li>";
+        message.innerHTML = "<li>Клавиатура создана в операционной системе Windows</li>";
+        message.innerHTML += "<li>Комбинация для переключения языка: ctrl + alt</li>";
 
         this.wrapper = document.createElement("div");
         this.wrapper.classList.add("wrapper", "keyboard");
@@ -42,6 +44,7 @@ class VirtualKeyboard {
         window.addEventListener("keyup", e => {
             this.switchBackroundBtn(e);
             this.clickHandler(e);
+            this.clickHandlerUp(e);
         });
     }
     render() {
@@ -77,6 +80,9 @@ class VirtualKeyboard {
     clickHandler(e) {
         if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
         || (e.ctrlKey && (e.code === "AltLeft" || e.code === "AltRight"))){
+            let lang = localStorage.getItem("lang") === "en" ? "ru" : "en";
+
+            localStorage.setItem("lang", lang);
             this.switchingLang();
         }
     }
@@ -98,11 +104,11 @@ class VirtualKeyboard {
             this.editTextAreaContent("write", "\t");
             break;
         case "CapsLock":
-                
+            this.switchCapsLock();
             break;
         case "ShiftLeft":
         case "ShiftRight":
-                
+            this.switchShift();
             break;
         case "ControlLeft":
         case "ControlRight":  
@@ -127,6 +133,14 @@ class VirtualKeyboard {
             break;
         default:
             this.editTextAreaContent("write", this.buttons[e.code].innerText);
+            break;
+        }
+    }
+    clickHandlerUp(e){
+        switch (e.code) {
+        case "ShiftLeft":
+        case "ShiftRight":
+            this.switchingLang();
             break;
         }
     }
@@ -156,17 +170,37 @@ class VirtualKeyboard {
         }
     }
     switchingLang(){
-        let lang = localStorage.getItem("lang") === "en" ? "ru" : "en";
+        let lang = localStorage.getItem("lang");
 
-        localStorage.setItem("lang", lang);
         for(let i = 0; i < this.data.length; i++) {
             this.data[i].forEach(elem => {
+                let code = elem.code;
+
                 if(elem[lang]?.value){
-                    let code = elem.code;
-                    this.buttons[code].innerText = elem[lang].value;
+                    this.buttons[code].innerText = this.capsLock ? elem[lang].value.toUpperCase() : elem[lang].value;
+                } else {
+                    this.buttons[code].innerText = elem.value;
                 }
             });
         }
+    }
+    switchShift(){
+        for(let i = 0; i < this.data.length; i++) {
+            this.data[i].forEach(elem => {
+                let code = elem.code;
+                let btn = this.buttons[code];
+
+                if(elem[localStorage.getItem("lang")]?.altValue){
+                    btn.innerText = elem[localStorage.getItem("lang")].altValue;
+                } else if(!btn.classList.contains("keyboard__btn-action")){
+                    btn.innerText = elem.altValue ? elem.altValue : this.capsLock ? btn.innerText.toLowerCase() : btn.innerText.toUpperCase();
+                }
+            });
+        }
+    }
+    switchCapsLock() {
+        this.capsLock = this.capsLock ? false : true;
+        this.switchingLang();
     }
 }
 
