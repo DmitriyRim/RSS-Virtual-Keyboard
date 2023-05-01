@@ -51,6 +51,7 @@ body {
 .keyboard {
     &__title {
         text-align: center;
+        margin-bottom: 1em;
     }
     &__textarea {
         resize: vertical;
@@ -106,5 +107,11 @@ body {
     }
     &__description{
         margin-top: 10px;
+    }
+    &__textarea {
+        font-size: 18px;
+        font-family: 'Roboto', sans-serif;
+        border-radius: 5px;
+        padding: 5px 10px;
     }
 }
