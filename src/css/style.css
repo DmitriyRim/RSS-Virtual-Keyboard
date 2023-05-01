@@ -103,6 +103,9 @@ body {
   background-color: lightcoral;
   box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.3);
 }
+.keyboard__btn_down:hover {
+  background-color: lightcoral;
+}
 .keyboard__btn_space {
   flex-grow: 10;
 }

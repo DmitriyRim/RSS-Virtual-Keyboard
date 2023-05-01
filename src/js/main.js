@@ -38,13 +38,30 @@ class VirtualKeyboard {
         this.container.append(this.wrapper);
         this.render();
         window.addEventListener("keydown", e => {
-            this.switchBackroundBtn(e);
-            this.clickHandlerDown(e);
+            this.switchBackroundBtn(e, e.code);
+            this.clickHandlerDown(e, e.code);
         });
         window.addEventListener("keyup", e => {
-            this.switchBackroundBtn(e);
-            this.clickHandler(e);
-            this.clickHandlerUp(e);
+            this.switchBackroundBtn(e, e.code);
+            this.clickHandler(e, e.code);
+            this.clickHandlerUp(e, e.code);
+        });
+        this.keyboard.addEventListener("mousedown", e => {
+            if(e.target.classList.contains("keyboard__btn")){
+                let code = e.target.dataset.code;
+
+                this.switchBackroundBtn(e, code);
+                this.clickHandlerDown(e, code);
+            }
+        });
+        this.keyboard.addEventListener("mouseup", e => {
+            if(e.target.classList.contains("keyboard__btn")){
+                let code = e.target.dataset.code;
+
+                this.switchBackroundBtn(e, code);
+                this.clickHandler(e, code);
+                this.clickHandlerUp(e, code);
+            }
         });
     }
     render() {
@@ -68,29 +85,29 @@ class VirtualKeyboard {
             this.keyboard.append(rowBox);
         }
     }
-    switchBackroundBtn(e){
-        const elem = this.buttons[e.code];
+    switchBackroundBtn(e, code){
+        const elem = this.buttons[code];
 
-        if(elem && e.code !== "CapsLock") {
+        if(elem && code !== "CapsLock") {
             e.preventDefault();
-            e.type === "keyup" && elem.classList.contains("keyboard__btn_down") ?  elem.classList.remove("keyboard__btn_down") : null; 
-            e.type === "keydown" ? elem.classList.add("keyboard__btn_down") : null;
-        } else {
-            e.code === "CapsLock" && this.capsLock ? elem.classList.add("keyboard__btn_down") : elem.classList.remove("keyboard__btn_down");
+            e.type === "keyup" || e.type === "mouseup" && elem.classList.contains("keyboard__btn_down") ?  elem.classList.remove("keyboard__btn_down") : null; 
+            e.type === "keydown" || e.type === "mousedown"? elem.classList.add("keyboard__btn_down") : null;
+        } else if(code == "CapsLock" && elem.dataset.code == "CapsLock"){
+            this.capsLock ? elem.classList.add("keyboard__btn_down") : elem.classList.remove("keyboard__btn_down");
         }
 
     }
-    clickHandler(e) {
-        if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
-        || (e.ctrlKey && (e.code === "AltLeft" || e.code === "AltRight"))){
+    clickHandler(e, code) {
+        if((e.altKey && (code === "ControlLeft" || code === "ControlRight")) 
+        || (e.ctrlKey && (code === "AltLeft" || code === "AltRight"))){
             let lang = localStorage.getItem("lang") === "en" ? "ru" : "en";
 
             localStorage.setItem("lang", lang);
             this.switchButtons();
         }
     }
-    clickHandlerDown(e) {
-        switch (e.code) {
+    clickHandlerDown(e, code) {
+        switch (code) {
         // case "ArrowUp":
                 
         //     break;
@@ -135,12 +152,12 @@ class VirtualKeyboard {
             this.editTextAreaContent("write", "\n");
             break;
         default:
-            this.editTextAreaContent("write", this.buttons[e.code].innerText);
+            this.editTextAreaContent("write", this.buttons[code]?.innerText);
             break;
         }
     }
-    clickHandlerUp(e){
-        switch (e.code) {
+    clickHandlerUp(e, code){
+        switch (code) {
         case "ShiftLeft":
         case "ShiftRight":
             this.switchButtons();
