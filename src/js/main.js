@@ -35,7 +35,10 @@ class VirtualKeyboard {
 
         this.container.append(this.wrapper);
         this.render();
-        window.addEventListener("keydown", this.switchBackroundBtn.bind(this));
+        window.addEventListener("keydown", e => {
+            this.switchBackroundBtn(e);
+            this.clickHandlerDown(e);
+        });
         window.addEventListener("keyup", e => {
             this.switchBackroundBtn(e);
             this.clickHandler(e);
@@ -75,6 +78,81 @@ class VirtualKeyboard {
         if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
         || (e.ctrlKey && (e.code === "AltLeft" || e.code === "AltRight"))){
             this.switchingLang();
+        }
+    }
+    clickHandlerDown(e) {
+        switch (e.code) {
+        // case "ArrowUp":
+                
+        //     break;
+        // case "ArrowDown":
+                
+        //     break;
+        case "ArrowRight":
+            this.textArea.selectionEnd = ++this.textArea.selectionStart;
+            break;
+        case "ArrowLeft":
+            this.textArea.selectionEnd = this.textArea.selectionEnd > 0 ? --this.textArea.selectionStart : 0;
+            break;
+        case "Tab":
+            this.editTextAreaContent("write", "\t");
+            break;
+        case "CapsLock":
+                
+            break;
+        case "ShiftLeft":
+        case "ShiftRight":
+                
+            break;
+        case "ControlLeft":
+        case "ControlRight":  
+            break;
+        case "MetaLeft":
+                
+            break;
+        case "AltLeft":
+        case "AltRight":     
+            break;
+        case "Backspace":
+            this.editTextAreaContent("backspace");
+            break;
+        case "Delete":
+            this.editTextAreaContent("del");
+            break;
+        case "Space":
+            this.editTextAreaContent("write", " ");
+            break;
+        case "Enter":
+            this.editTextAreaContent("write", "\n");
+            break;
+        default:
+            this.editTextAreaContent("write", this.buttons[e.code].innerText);
+            break;
+        }
+    }
+    writeСharacter(char){
+        this.textArea.focus();
+        this.textArea.value += char;
+    }
+    editTextAreaContent(mode, char) {
+        this.textArea.focus();
+        let posStart = this.textArea.selectionStart;
+        let arr = this.textArea.value.split("");
+
+        if(mode === "backspace" && posStart > 0){
+            arr.splice(posStart - 1, 1);
+            this.textArea.value = arr.join("");
+            this.textArea.selectionStart, this.textArea.selectionEnd = posStart - 1;
+        }
+        if(mode === "write"){
+            arr.splice(posStart , 0, char);
+            this.textArea.value = arr.join("");
+            this.textArea.selectionStart, this.textArea.selectionEnd = posStart + 1;
+        }
+        if(mode === "del"){
+            arr.splice(posStart, 1);
+            this.textArea.value = arr.join("");
+            this.textArea.selectionStart, this.textArea.selectionEnd = posStart;
         }
     }
     switchingLang(){
