@@ -1,0 +1,120 @@
+:root {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+li {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.wrapper {
+  width: 860px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.keyboard__title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.keyboard__textarea {
+  resize: vertical;
+  max-width: 100%;
+  min-height: 10em;
+  outline: none;
+  margin-bottom: 10px;
+}
+.keyboard__row {
+  display: flex;
+  justify-content: stretch;
+  gap: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.keyboard__buttons {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(206, 210, 217, 0.7);
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.keyboard__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 0;
+  min-width: 45px;
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+.keyboard__btn:hover {
+  background-color: rgb(133, 223, 250);
+}
+.keyboard__btn-action {
+  background: #AEB3BE;
+  flex-grow: 1;
+}
+.keyboard__btn_down {
+  background-color: lightcoral;
+  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.3);
+}
+.keyboard__btn_down:hover {
+  background-color: lightcoral;
+}
+.keyboard__btn_space {
+  flex-grow: 10;
+}
+.keyboard__description {
+  margin-top: 10px;
+}
+.keyboard__textarea {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  padding: 5px 10px;
+}/*# sourceMappingURL=style.css.map */
