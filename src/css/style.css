@@ -101,4 +101,7 @@ body {
 }
 .keyboard__btn_space {
   flex-grow: 10;
+}
+.keyboard__description {
+  margin-top: 10px;
 }/*# sourceMappingURL=style.css.map */

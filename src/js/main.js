@@ -12,6 +12,7 @@ class VirtualKeyboard {
     }
     init(){
         const title = document.createElement("h1");
+        const message = document.createElement("ul");
 
         title.innerText = "RSS Виртуальная клавиатура";
         title.classList.add("keyboard__title");
@@ -25,9 +26,12 @@ class VirtualKeyboard {
         this.keyboard = document.createElement("div");
         this.keyboard.classList.add("keyboard__buttons");
 
+        message.classList.add("keyboard__description");
+        message.innerHTML = "<li>Комбинация для переключения языка: ctrl + alt</li>";
+
         this.wrapper = document.createElement("div");
         this.wrapper.classList.add("wrapper", "keyboard");
-        this.wrapper.append(title, this.textArea, this.keyboard);
+        this.wrapper.append(title, this.textArea, this.keyboard, message);
 
         this.container.append(this.wrapper);
         this.render();
@@ -60,7 +64,7 @@ class VirtualKeyboard {
     }
     switchBackroundBtn(e){
         const elem = this.buttons[e.code];
-        
+
         if(elem) {
             e.preventDefault();
             e.type === "keyup" && elem.classList.contains("keyboard__btn_down") ?  elem.classList.remove("keyboard__btn_down") : null; 
