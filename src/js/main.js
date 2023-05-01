@@ -8,6 +8,7 @@ class VirtualKeyboard {
         this.textArea = null;
         this.keyboard = null;
         this.buttons = null;
+        !localStorage.getItem("lang") ? localStorage.setItem("lang", "en") : null;
     }
     init(){
         const title = document.createElement("h1");
@@ -31,16 +32,23 @@ class VirtualKeyboard {
         this.container.append(this.wrapper);
         this.render();
         window.addEventListener("keydown", this.switchBackroundBtn.bind(this));
-        window.addEventListener("keyup", this.switchBackroundBtn.bind(this));
+        window.addEventListener("keyup", e => {
+            this.switchBackroundBtn(e);
+            this.clickHandler(e);
+        });
     }
     render() {
+        let lang = localStorage.getItem("lang");
+
+        this.keyboard.innerHTML ="";
         this.buttons = {};
+        
         for(let i = 0; i < this.data.length; i++) {
             const rowBox = document.createElement("div");
             let buttons = null;
             rowBox.classList.add("keyboard__row");
             buttons = this.data[i].map(elem => {
-                const key = new Key(elem, "en");
+                const key = new Key(elem, lang);
                 const btn = key.create();
 
                 this.buttons[elem.code] = btn;
@@ -57,6 +65,16 @@ class VirtualKeyboard {
             e.preventDefault();
             e.type === "keyup" && elem.classList.contains("keyboard__btn_down")?  elem.classList.remove("keyboard__btn_down") : null; 
             e.type === "keydown" ? elem.classList.add("keyboard__btn_down") : null;
+        }
+    }
+    clickHandler(e) {
+        console.log(e);
+        if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
+        || (e.ctrlKey && (e.code === "AltLeft" || e.code === "AltRight"))){
+            let lang = localStorage.getItem("lang");
+            
+            localStorage.setItem("lang", lang === "en" ? "ru" : "en");
+            this.render();
         }
     }
 }
