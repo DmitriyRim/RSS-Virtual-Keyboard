@@ -71,11 +71,14 @@ class VirtualKeyboard {
     switchBackroundBtn(e){
         const elem = this.buttons[e.code];
 
-        if(elem) {
+        if(elem && e.code !== "CapsLock") {
             e.preventDefault();
             e.type === "keyup" && elem.classList.contains("keyboard__btn_down") ?  elem.classList.remove("keyboard__btn_down") : null; 
             e.type === "keydown" ? elem.classList.add("keyboard__btn_down") : null;
+        } else {
+            e.code === "CapsLock" && this.capsLock ? elem.classList.add("keyboard__btn_down") : elem.classList.remove("keyboard__btn_down");
         }
+
     }
     clickHandler(e) {
         if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
