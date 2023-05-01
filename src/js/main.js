@@ -63,18 +63,27 @@ class VirtualKeyboard {
         
         if(elem) {
             e.preventDefault();
-            e.type === "keyup" && elem.classList.contains("keyboard__btn_down")?  elem.classList.remove("keyboard__btn_down") : null; 
+            e.type === "keyup" && elem.classList.contains("keyboard__btn_down") ?  elem.classList.remove("keyboard__btn_down") : null; 
             e.type === "keydown" ? elem.classList.add("keyboard__btn_down") : null;
         }
     }
     clickHandler(e) {
-        console.log(e);
         if((e.altKey && (e.code === "ControlLeft" || e.code === "ControlRight")) 
         || (e.ctrlKey && (e.code === "AltLeft" || e.code === "AltRight"))){
-            let lang = localStorage.getItem("lang");
-            
-            localStorage.setItem("lang", lang === "en" ? "ru" : "en");
-            this.render();
+            this.switchingLang();
+        }
+    }
+    switchingLang(){
+        let lang = localStorage.getItem("lang") === "en" ? "ru" : "en";
+
+        localStorage.setItem("lang", lang);
+        for(let i = 0; i < this.data.length; i++) {
+            this.data[i].forEach(elem => {
+                if(elem[lang]?.value){
+                    let code = elem.code;
+                    this.buttons[code].innerText = elem[lang].value;
+                }
+            });
         }
     }
 }
